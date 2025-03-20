@@ -1,8 +1,8 @@
 ﻿namespace kontenery;
 
-public class Kontener 
+public class Kontener
 {
-    public double masa_ladunek { get; set; }
+    protected double masa_ladunek;
     public double wysokosc { get; set; }
     public double masa_kontener { get; set; }
     public double glebokosc { get; set; }
@@ -11,9 +11,8 @@ public class Kontener
     public static int index = 0;
 
 
-    public Kontener(double masaLadunek, double wysokosc, double masaKontener, double glebokosc, double maxLadownosc)
+    public Kontener(double wysokosc, double masaKontener, double glebokosc, double maxLadownosc)
     {
-        masa_ladunek = masaLadunek;
         this.wysokosc = wysokosc;
         masa_kontener = masaKontener;
         this.glebokosc = glebokosc;
@@ -22,7 +21,7 @@ public class Kontener
         
     }
 
-    public void oproznienie()
+    public virtual void oproznienie()
     {
         if (masa_ladunek != 0)
         {
@@ -31,7 +30,7 @@ public class Kontener
         
     }
 
-    public void zaladowanie(double masa)
+    public virtual void zaladowanie(double masa)
     {
         masa_ladunek += masa;
         if (masa_ladunek > max_Ladownosc)

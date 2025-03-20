@@ -1,6 +1,6 @@
 ﻿namespace kontenery;
 
-public class IHazardNotifier
+public interface IHazardNotifier
 {
-    
+    public void Notify();
 }
