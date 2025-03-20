@@ -2,7 +2,10 @@
 
 public class Kontener
 {
-    protected double masa_ladunek;
+    public double masa_ladunek {
+        get;
+        set;
+    }
     public double wysokosc { get; set; }
     public double masa_kontener { get; set; }
     public double glebokosc { get; set; }
@@ -18,7 +21,9 @@ public class Kontener
         this.glebokosc = glebokosc;
         max_Ladownosc = maxLadownosc;
         index++;
-        
+        masa_ladunek = 0;
+        numer_seryjny = "";
+
     }
 
     public virtual void oproznienie()
@@ -32,11 +37,35 @@ public class Kontener
 
     public virtual void zaladowanie(double masa)
     {
-        masa_ladunek += masa;
-        if (masa_ladunek > max_Ladownosc)
+        try
         {
-            throw new OverFillException(
-                $"OBECNA MASA ŁADUNKU PO ZAŁADOWANIU DLA {numer_seryjny} JEST WIĘKSZA NIŻ JEGO POJEMNOŚĆ");
+            
+
+            if (masa_ladunek + masa > max_Ladownosc)
+            {
+                throw new OverFillException(
+                    $"OBECNA MASA ŁADUNKU PO ZAŁADOWANIU DLA {numer_seryjny} JEST WIĘKSZA NIŻ JEGO POJEMNOŚĆ");
+            } 
+            masa_ladunek += masa;
+            
         }
+        catch (OverFillException ex)
+        {
+            Console.WriteLine($"{ex.Message}");
+            
+            return;
+        }
+    }
+
+    public virtual void info()
+    {
+        Console.WriteLine($"Kontener {numer_seryjny}:");
+        Console.WriteLine($"- Typ: {this.GetType().Name}");
+        Console.WriteLine($"- Waga_kontenera: {masa_kontener} kg");
+        Console.WriteLine($"- Wysokość: {wysokosc} cm");
+        Console.WriteLine($"- Głębokość: {glebokosc} cm");
+        Console.WriteLine($"- Max_ladownosc: {max_Ladownosc} kg");
+        Console.WriteLine($"- Ładunek: {masa_ladunek} kg");
+        
     }
 }

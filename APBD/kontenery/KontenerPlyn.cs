@@ -42,4 +42,10 @@ public class KontenerPlyn : Kontener, IHazardNotifier
             }
         }
     }
+
+    public override void info()
+    {
+        base.info();
+        Console.WriteLine($"- Ładunek niebezpieczny: {LadunekNiebezpieczny} ");
+    }
 }

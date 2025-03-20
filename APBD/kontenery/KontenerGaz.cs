@@ -27,4 +27,10 @@ public class KontenerGaz : Kontener, IHazardNotifier
     {
         throw new NotImplementedException();
     }
+
+    public override void info()
+    {
+        base.info();
+        Console.WriteLine($"- cisnienie: {cisnienie} kg");
+    }
 }

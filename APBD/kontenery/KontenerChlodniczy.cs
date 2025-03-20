@@ -4,6 +4,7 @@ public class KontenerChlodniczy : Kontener
 {
     public string RodzajProdukt { get; set; }
     public double temperatura;
+    public bool zaladowany = false;  
     Dictionary<string, double> produktyTemperatury = new Dictionary<string, double>
     {
         { "Bananas", 13.3 },
@@ -27,20 +28,36 @@ public class KontenerChlodniczy : Kontener
             return;
         }
 
-        if (this.temperatura < produktyTemperatury[rodzajProdukt])
+        if (temperatura < produktyTemperatury[rodzajProdukt])
         {
             Console.WriteLine("Temperatura kontenera nie moze byc nizsza niz temperatura produktu, kontener nie utworzony");
             return;
         }
         this.temperatura = temperatura;
+        this.RodzajProdukt = rodzajProdukt;
+        
         
     }
 
-    public  void zaladowanie(double masa, string rodzajProdukt)
+    public override void zaladowanie(double masa)
     {
-        if (produktyTemperatury[rodzajProdukt] > temperatura)
+
+        if (zaladowany && RodzajProdukt == this.RodzajProdukt)
         {
-            
+           base.zaladowanie(masa);
         }
+
+        if (!zaladowany)
+        {
+            zaladowany = true;
+            base.zaladowanie(masa);
+        }
+       
+    }
+
+    public override void info()
+    {
+        base.info();
+        Console.WriteLine($"- Rodzaj przewożonego towaru: {RodzajProdukt} ");
     }
 }
