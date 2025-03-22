@@ -35,22 +35,23 @@ public class KontenerChlodniczy : Kontener
         }
         this.temperatura = temperatura;
         this.RodzajProdukt = rodzajProdukt;
-        
+        numer_seryjny = $"KON-C-{index}";
+        index++;
         
     }
 
-    public override void zaladowanie(double masa)
+    public override void zaladowanie(double masa, Statek statek)
     {
 
         if (zaladowany && RodzajProdukt == this.RodzajProdukt)
         {
-           base.zaladowanie(masa);
+           base.zaladowanie(masa, statek);
         }
 
         if (!zaladowany)
         {
             zaladowany = true;
-            base.zaladowanie(masa);
+            base.zaladowanie(masa, statek);
         }
        
     }

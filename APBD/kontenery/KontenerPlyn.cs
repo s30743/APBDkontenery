@@ -8,6 +8,7 @@ public class KontenerPlyn : Kontener, IHazardNotifier
     {
         LadunekNiebezpieczny = ladunekNiebezpieczny;
         numer_seryjny = $"KON-P-{index}";
+        index++;
     }
 
     public void Notify()
@@ -15,7 +16,7 @@ public class KontenerPlyn : Kontener, IHazardNotifier
         Console.WriteLine($"NIEBEZPIECZENSTGW DLA : KON-P-{index}");
     }
 
-    public override void zaladowanie(double masa)
+    public override void zaladowanie(double masa, Statek statek)
     {
         if (LadunekNiebezpieczny)
         {
@@ -27,6 +28,7 @@ public class KontenerPlyn : Kontener, IHazardNotifier
             else
             {
                 masa_ladunek += masa;
+                statek.waga_obecna += masa;
             }
         }
         else
@@ -39,6 +41,7 @@ public class KontenerPlyn : Kontener, IHazardNotifier
             else
             {
                 masa_ladunek += masa;
+                statek.waga_obecna += masa;
             }
         }
     }

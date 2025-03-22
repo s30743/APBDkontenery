@@ -8,19 +8,20 @@ public class KontenerGaz : Kontener, IHazardNotifier
     {
         this.cisnienie = cisnienie;
         numer_seryjny = $"KON-G-{index}";
+        index++;
     }
 
 
-    public override void oproznienie()
+    public override void oproznienie(Statek statek)
     {
         double zapamietana_masa = masa_ladunek * 0.05;
-        base.oproznienie();
+        base.oproznienie(statek);
         masa_ladunek += zapamietana_masa;
     }
 
-    public override void zaladowanie(double masa)
+    public override void zaladowanie(double masa, Statek statek)
     {
-        base.zaladowanie(masa);
+        base.zaladowanie(masa, statek);
     }
 
     public void Notify()

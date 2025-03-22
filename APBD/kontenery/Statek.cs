@@ -11,6 +11,7 @@ public class Statek
     public int max_kontenery { get; set; }
     public double max_waga_kontenery { get; set; }
     public double waga_obecna { get; set; }
+    public int indexstatek { get; set; }    
 
 
     public Statek(double predkosc, int maxKontenery, double maxWagaKontenery)
@@ -18,10 +19,67 @@ public class Statek
         this.konteneryStatek = new List<Kontener>();
         this.predkosc = predkosc;
         this.max_kontenery = maxKontenery;
-        this.max_waga_kontenery = maxWagaKontenery;
+        this.max_waga_kontenery = maxWagaKontenery * 1000;
+        this.indexstatek = ++StatekIndex;
         waga_obecna = 0;
     }
+    private static int StatekIndex = 0;
 
+    public static Statek DodajKontenerowiec()
+    {
+        Console.Write("Podaj prędkość statku: ");
+        double predkosc = Convert.ToDouble(Console.ReadLine());
+        Console.Write("Podaj maksymalną liczbę kontenerów: ");
+        int maxKontenery = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Podaj maksymalną wagę kontenerów: ");
+        double maxWagaKontenery = Convert.ToDouble(Console.ReadLine());
+        Statek statek = new Statek(predkosc, maxKontenery, maxWagaKontenery);
+        return statek;
+    }
+    public Kontener StworzKontener()
+    {
+        
+        Console.Write("Wysokość: ");
+        double wysokosc = Convert.ToDouble(Console.ReadLine());
+        Console.Write("Masa kontenera: ");
+        double masaKontener = Convert.ToDouble(Console.ReadLine());
+        Console.Write("Głębokość: ");
+        double glebokosc = Convert.ToDouble(Console.ReadLine());
+        Console.Write("Maksymalna ładowność: ");
+        double maxLadownosc = Convert.ToDouble(Console.ReadLine());
+
+        return new Kontener(wysokosc, masaKontener, glebokosc, maxLadownosc);
+    }
+    public KontenerChlodniczy StworzKontenerChlodniczy()
+    {
+        Kontener kontener = StworzKontener();
+        Console.Write("Temperatura kontenera: ");
+        double temperatura = Convert.ToDouble(Console.ReadLine());
+        Console.Write("Rodzaj produktu: ");
+        string rodzajProdukt = Console.ReadLine();
+
+        return new KontenerChlodniczy(kontener.wysokosc, kontener.masa_kontener, kontener.glebokosc, kontener.max_Ladownosc, temperatura, rodzajProdukt);
+    }
+
+    public KontenerPlyn StworzKontenerPlynny()
+    {
+        Kontener kontener = StworzKontener();
+        Console.Write("Czy ładunek jest niebezpieczny? (true/false): ");
+        bool ladunekNiebezpieczny = Convert.ToBoolean(Console.ReadLine());
+
+        return new KontenerPlyn(kontener.wysokosc, kontener.masa_kontener, kontener.glebokosc, kontener.max_Ladownosc, ladunekNiebezpieczny);
+    }
+
+    public KontenerGaz StworzKontenerGazowy()
+    {
+        Kontener kontener = StworzKontener();
+        Console.Write("Ciśnienie gazu: ");
+        double cisnienie = Convert.ToDouble(Console.ReadLine());
+
+        return new KontenerGaz(kontener.wysokosc, kontener.masa_kontener, kontener.glebokosc, kontener.max_Ladownosc, cisnienie);
+    }
+
+    
     public void DodajKontener(Kontener k)
     {
         if (konteneryStatek.Count >= max_kontenery)
@@ -34,6 +92,7 @@ public class Statek
         {
             konteneryStatek.Add(k);
             waga_obecna += k.masa_ladunek + k.masa_kontener;
+            Console.WriteLine($"Kontener {k.numer_seryjny} został dodany na statek.");
             
             
         }
@@ -49,6 +108,7 @@ public class Statek
         if (konteneryStatek.Contains(k))
         {
             konteneryStatek.Remove(k);
+            waga_obecna -= k.masa_ladunek + k.masa_kontener;
             
         }
         else
@@ -117,7 +177,7 @@ public class Statek
 
     public void InfoStatek()
     {
-        Console.WriteLine("-------------------");
+        /*Console.WriteLine("-------------------");
         Console.WriteLine($"- Predkosc {predkosc}:");
         Console.WriteLine($"- maksymalna ilosc kontenerow: {max_kontenery} kg");
         Console.WriteLine($"- maksymalan waga kontenerow: {max_waga_kontenery} kg");
@@ -128,6 +188,17 @@ public class Statek
             Console.WriteLine($"- {k.numer_seryjny}");
         }
         
-        Console.WriteLine("-------------------");
+        Console.WriteLine("-------------------");*/
+        Console.WriteLine($"Statek " + indexstatek + $" speed={predkosc}, maxContainerNum={max_kontenery}, maxWeight={max_waga_kontenery}, obecna_waga={waga_obecna}");
     }
+
+    public  void WyswietlKontenerowce()
+    {
+        Console.WriteLine("Lista kontenerowców:");
+        if (this.konteneryStatek.Count ==0)
+        {
+            Console.WriteLine("Brak");
+        }
+    }
+    
 }
