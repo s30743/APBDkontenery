@@ -52,11 +52,13 @@ public class Statek
     }
     public KontenerChlodniczy StworzKontenerChlodniczy()
     {
+        
+        Console.Write("Rodzaj produktu: ");
+        string rodzajProdukt = Console.ReadLine();
         Kontener kontener = StworzKontener();
         Console.Write("Temperatura kontenera: ");
         double temperatura = Convert.ToDouble(Console.ReadLine());
-        Console.Write("Rodzaj produktu: ");
-        string rodzajProdukt = Console.ReadLine();
+        
 
         return new KontenerChlodniczy(kontener.wysokosc, kontener.masa_kontener, kontener.glebokosc, kontener.max_Ladownosc, temperatura, rodzajProdukt);
     }

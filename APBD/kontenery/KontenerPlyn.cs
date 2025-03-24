@@ -3,12 +3,13 @@
 public class KontenerPlyn : Kontener, IHazardNotifier
 {
     public bool LadunekNiebezpieczny { get; set; }
+    
 
     public KontenerPlyn(double wysokosc, double masaKontener, double glebokosc, double maxLadownosc, bool ladunekNiebezpieczny) : base(wysokosc, masaKontener, glebokosc, maxLadownosc)
     {
         LadunekNiebezpieczny = ladunekNiebezpieczny;
-        numer_seryjny = $"KON-P-{index}";
-        index++;
+        numer_seryjny = $"KON-P-{index++}";
+        
     }
 
     public void Notify()

@@ -18,6 +18,7 @@ public class KontenerChlodniczy : Kontener
         { "Butter", 20.5 },
         { "Eggs", 19 }
     };
+    public static int index = 1;
 
     public KontenerChlodniczy(double wysokosc, double masaKontener, double glebokosc, double maxLadownosc, double temperatura, string rodzajProdukt) : base(wysokosc, masaKontener, glebokosc, maxLadownosc)
     {
@@ -35,8 +36,8 @@ public class KontenerChlodniczy : Kontener
         }
         this.temperatura = temperatura;
         this.RodzajProdukt = rodzajProdukt;
-        numer_seryjny = $"KON-C-{index}";
-        index++;
+        numer_seryjny = $"KON-C-{index++}";
+        
         
     }
 

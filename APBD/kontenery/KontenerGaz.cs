@@ -3,12 +3,12 @@
 public class KontenerGaz : Kontener, IHazardNotifier
 {
     public double cisnienie { get; set; }
-
+    
     public KontenerGaz(double wysokosc, double masaKontener, double glebokosc, double maxLadownosc, double cisnienie) : base(wysokosc, masaKontener, glebokosc, maxLadownosc)
     {
         this.cisnienie = cisnienie;
-        numer_seryjny = $"KON-G-{index}";
-        index++;
+        numer_seryjny = $"KON-G-{index++}";
+        
     }
 
 
@@ -26,7 +26,7 @@ public class KontenerGaz : Kontener, IHazardNotifier
 
     public void Notify()
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"NIEBEZPIECZENSTGW DLA : KON-P-{index}");
     }
 
     public override void info()
