@@ -21,28 +21,14 @@ public class KontenerPlyn : Kontener, IHazardNotifier
         if (LadunekNiebezpieczny)
         {
             max_Ladownosc *= 0.50;
-            if (masa > max_Ladownosc)
-            {
-                Notify();
-            }
-            else
-            {
-                masa_ladunek += masa;
-                statek.waga_obecna += masa;
-            }
+            Notify();
+            base.zaladowanie(masa, statek);
         }
         else
         {
             max_Ladownosc *= 0.9;
-            if (masa > max_Ladownosc)
-            {
-                Notify();
-            }
-            else
-            {
-                masa_ladunek += masa;
-                statek.waga_obecna += masa;
-            }
+            Notify();
+            base.zaladowanie(masa, statek);
         }
     }
 

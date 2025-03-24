@@ -44,7 +44,7 @@ public class Kontener
         {
             
 
-            if (masa_ladunek + masa > max_Ladownosc)
+            if (this.masa_ladunek + masa > max_Ladownosc)
             {
                 masa_ladunek += masa;
                 statek.waga_obecna += masa;
